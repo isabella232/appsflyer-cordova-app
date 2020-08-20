@@ -1,18 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.afcordova.cooking" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Whitelist">
-        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
-        <param name="onload" value="true" />
+<widget id="com.appsflyer.app.letscook" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="AppsFlyerPlugin">
+        <param name="android-package" value="com.appsflyer.cordova.plugin.AppsFlyerPlugin" />
+    </feature>
+    <feature name="SharedPreferences">
+        <param name="android-package" value="com.adrianodigiovanni.sharedpreferences.CDVSharedPreferences" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
     <feature name="StatusBar">
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="InAppBrowser">
-        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
-    </feature>
-    <feature name="SharedPreferences">
-        <param name="android-package" value="com.adrianodigiovanni.sharedpreferences.CDVSharedPreferences" />
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
     </feature>
     <name>letscook</name>
     <description>

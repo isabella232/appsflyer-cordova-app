@@ -35,6 +35,22 @@ module.exports = [
         "clobbers": [
             "window.plugins.SharedPreferences"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-appsflyer-sdk/www/appsflyer.js",
+        "id": "cordova-plugin-appsflyer-sdk.appsflyer",
+        "pluginId": "cordova-plugin-appsflyer-sdk",
+        "clobbers": [
+            "window.plugins.appsFlyer"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-appsflyer-sdk/www/AppsFlyerError.js",
+        "id": "cordova-plugin-appsflyer-sdk.AppsFlyerError",
+        "pluginId": "cordova-plugin-appsflyer-sdk",
+        "clobbers": [
+            "AppsFlyerError"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -43,7 +59,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.4",
     "cordova-plugin-statusbar": "2.4.3",
     "cordova-plugin-inappbrowser": "4.0.0",
-    "cordova-plugin-awesome-shared-preferences": "0.1.0"
+    "cordova-plugin-awesome-shared-preferences": "0.1.0",
+    "cordova-plugin-appsflyer-sdk": "5.4.30"
 }
 // BOTTOM OF METADATA
 });

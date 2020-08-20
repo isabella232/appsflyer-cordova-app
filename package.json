@@ -6,9 +6,9 @@
     "@material-ui/core": "~4.11.0",
     "@material-ui/icons": "~4.9.1",
     "axios": "~0.19.2",
-    "cordova-android": "~8.1.0",
+    "cordova-android": "^8.1.0",
     "cordova-browser": "~6.0.0",
-    "cordova-ios": "~5.1.1",
+    "cordova-plugin-appsflyer-sdk": "^5.4.30",
     "cordova-plugin-awesome-shared-preferences": "^0.1.0",
     "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-statusbar": "2.4.3",
@@ -59,10 +59,10 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-awesome-shared-preferences": {}
+      "cordova-plugin-awesome-shared-preferences": {},
+      "cordova-plugin-appsflyer-sdk": {}
     },
     "platforms": [
-      "ios",
       "browser",
       "android"
     ]

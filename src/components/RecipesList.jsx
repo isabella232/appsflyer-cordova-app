@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Recipe from './Recipe';
 import Box from '@material-ui/core/Box';
+import SnackBar from './SnackBar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -31,22 +32,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RecipesList = (props) => {
+	const { ingredients } = props;
 	const classes = useStyles();
 	const [data, setData] = useState([]);
-	const [favorites, setFavorites] = useState([]);
-	const storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
+	const [open, setOpenSnackBar] = useState(false);
+	const [message, setMessage] = useState('');
 	const proxyUrl = 'https://cors-anywhere.herokuapp.com/',
 		targetUrl = 'http://www.recipepuppy.com/api/?i=';
 
 	useEffect(() => {
-		fetchData();
-	}, [props.ingredients]);
+		if (ingredients.length !== 0) {
+			fetchData();
+		} else {
+			setData([]);
+		}
+	}, [ingredients]);
 
 	const fetchData = () => {
 		axios
-			.get(proxyUrl + targetUrl + props.ingredients)
+			.get(proxyUrl + targetUrl + ingredients)
 			.then((res) => {
-				storage.keys(successCallback, errorCallback);
 				setData(res.data.results);
 			})
 			.catch((res) => {
@@ -54,29 +59,30 @@ const RecipesList = (props) => {
 			});
 	};
 
-	const successCallback = (keys) => {
-		setFavorites(keys);
+	const openSnackbar = (str) => {
+		setMessage(str);
+		setOpenSnackBar(true);
 	};
-
-	const errorCallback = function (err) {
-		console.error(err);
+	const handleCloseSnackBar = () => {
+		setOpenSnackBar(false);
 	};
 
 	return (
 		<div>
-			{props.ingredients.length === 0 ? (
-				<Box display='flex' height='70vh' alignItems='center'>
+			{ingredients.length === 0 ? (
+				<Box display='flex' height='50vh' alignItems='center'>
 					<Typography variant='h4' gutterBottom className={classes.backgroundTitle} align='center'>
 						Type ingredients to search for a recipe...
 					</Typography>
 				</Box>
 			) : (
-				<div>
+				<div style={{ height: '100%', marginBottom: 50 }}>
 					{data.map((recipe) => (
-						<Recipe title={recipe.title} thumbnail={recipe.thumbnail} ingredients={recipe.ingredients} href={recipe.href} favorite={false} />
+						<Recipe title={recipe.title} thumbnail={recipe.thumbnail} ingredients={recipe.ingredients} href={recipe.href} userFeedback={openSnackbar} />
 					))}
 				</div>
 			)}
+			<SnackBar open={open} message={message} close={handleCloseSnackBar} />
 		</div>
 	);
 };

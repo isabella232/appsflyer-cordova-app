@@ -8,7 +8,7 @@ import SearchPage from './components/SearchPage';
 import ShoppingList from './components/ShoppingList';
 import Favorites from './components/Favorites';
 import AboutDialog from './components/AboutDialog';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
@@ -54,10 +54,11 @@ function App() {
 			<AboutDialog open={openDialog} close={handleCloseDialog} />
 
 			<Router>
-				<Route path='/' exact component={SearchPage} />
-				<Route path='/list' component={ShoppingList} />
-				<Route path='/favorites' component={Favorites} />
-
+				<Switch>
+					<Route path='/list' component={ShoppingList} />
+					<Route path='/favorites' component={Favorites} />
+					<Route path='' exact component={SearchPage} />
+				</Switch>
 				<BottomNavigation
 					value={value}
 					onChange={(event, newValue) => {

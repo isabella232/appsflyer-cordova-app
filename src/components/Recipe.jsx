@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
+import React, { useState, useEffect } from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,20 +12,6 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		display: 'flex',
-		flexWrap: 'wrap',
-		justifyContent: 'space-around',
-		overflow: 'hidden',
-		backgroundColor: theme.palette.background.paper,
-		marginBottom: 10,
-		marginTop: 10,
-		height: 200,
-	},
-	media: {
-		height: 130,
-	},
 	icon: {
 		textAlign: 'center',
 	},
@@ -37,39 +23,60 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Recipe = (props) => {
+	const { title, thumbnail, ingredients, href, userFeedback } = props;
 	const classes = useStyles();
-	const [favorite, setfavorite] = useState(props.favorite);
-	const [open, setOpen] = useState(false);
-	const [message, setMessage] = useState('');
+	const [favorite, setfavorite] = useState(false);
+	const storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
+	const ingredientsStorage = window.plugins.SharedPreferences.getInstance('shoppingList');
 
-	const handleOpenRecipe = (url) => {
+	useEffect(() => {
+		storage.has(title, handleFetchSuccess, handleFetchFailure);
+	}, []);
+
+	const handleOpenRecipeUrl = (url) => {
 		window.open(url, '_blank');
 	};
 
-	const handleClose = () => {
-		setOpen(false);
+	const handleFetchSuccess = (result) => {
+		setfavorite(result);
 	};
+	const handleFetchFailure = () => {};
+	const successTrackEvent = (success) => {
+		//do something after the event registered in appsflyer
+		console.log(success);
+	};
+	const failureTrackEvent = (failure) => {
+		//do something after the registration failed
+		console.log(failure);
+	};
+
 	const handleSave = () => {
+		storage.put(title, JSON.stringify([thumbnail, ingredients, href]), () => console.log(`${title} saved`), console.log('propblem'));
 		setfavorite(true);
-		var storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
-		storage.put(props.title, JSON.stringify([props.thumbnail, props.ingredients, props.href]), handleSaveSuccess, handleSaveFailure);
+		userFeedback(`${title} added to favorites!`);
+		var eventName = 'af_added_to_favorites'; //the event name as it will appear on the dashboard. for recommended names visit appsflyer's support site.
+		var eventValues = { af_content_id: title, af_currency: 'USD', af_revenue: '2' };
+		window.plugins.appsFlyer.trackEvent(eventName, eventValues, successTrackEvent, failureTrackEvent); //register the event on appsflyer's server
 	};
 
 	const handleDelete = () => {
+		storage.del(title, () => console.log(`${title} removed`), console.log('propblem'));
 		setfavorite(false);
-		var storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
-		storage.del(props.title, handleSaveSuccess, handleSaveFailure);
+		userFeedback(`${title} removed to favorites!`);
 	};
-
-	const handleSaveSuccess = () => {
-		// setfavorite(true);
-		// setMessage('yesss');
-		// setOpen(true);
-	};
-	const handleSaveFailure = () => {
-		// setfavorite(false);
-		// setMessage('noo..');
-		// setOpen(true);
+	const handleAddToTheShoppingCart = (str) => {
+		userFeedback('Added to shopping cart!');
+		str.split(',').map((i) => {
+			ingredientsStorage.putBoolean(
+				i.trim(),
+				false,
+				() => console.log(),
+				() => console.log()
+			);
+		});
+		var eventName = 'af_added_to_cart'; //the event name as it will appear on the dashboard. for recommended names visit appsflyer's support site.
+		var eventValues = { af_content_id: ingredients };
+		window.plugins.appsFlyer.trackEvent(eventName, eventValues, successTrackEvent, failureTrackEvent); //register the event on appsflyer's server
 	};
 
 	return (
@@ -77,20 +84,19 @@ const Recipe = (props) => {
 			<List dense={true}>
 				<ListItem>
 					<ListItemAvatar>
-						<Avatar className={classes.large} alt={props.title} src={props.thumbnail} />
+						<Avatar className={classes.large} alt={title} src={thumbnail} />
 					</ListItemAvatar>
-					<ListItemText primary={props.title} secondary={props.ingredients} onClick={() => handleOpenRecipe(props.href)} />
-					{/* <ListItemText primary={props.title} secondary={favorite} onClick={() => handleOpenRecipe(props.href)} /> */}
+					<ListItemText primary={title} secondary={ingredients} onClick={() => handleOpenRecipeUrl(href)} />
 					<ListItemSecondaryAction>
+						<IconButton edge='end' aria-label='delete'>
+							<AddShoppingCartIcon onClick={() => handleAddToTheShoppingCart(ingredients)} />
+						</IconButton>
 						<IconButton edge='end' aria-label='delete'>
 							{favorite ? <FavoriteIcon fontSize='large' style={{ color: '#FF9134' }} onClick={() => handleDelete()} /> : <FavoriteBorderIcon className={classes.icon} fontSize='large' style={{ color: '#C2C2C2' }} onClick={() => handleSave()} />}
 						</IconButton>
 					</ListItemSecondaryAction>
 				</ListItem>
 			</List>
-			<Snackbar anchorOrigin={('top', 'center')} open={open} autoHideDuration={3000} onClose={handleClose}>
-				{message}
-			</Snackbar>
 		</div>
 	);
 };

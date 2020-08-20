@@ -1,5 +1,6 @@
 import React from 'react';
 import Recipe from './Recipe';
+import FavoriteRecipe from './FavoriteRecipe';
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -39,10 +40,9 @@ const Favorites = () => {
 
 	useEffect(() => {
 		fetchData();
-	}, [keys]);
+	}, []);
 
 	const fetchData = () => {
-		// var storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
 		storage.keys(successCallback, errorCallback);
 	};
 
@@ -52,45 +52,28 @@ const Favorites = () => {
 	var errorCallback = function (err) {
 		console.error(err);
 	};
-	var successclearCallback = function (val) {
-		console.log(val);
-	};
-	var errorclearCallback = function (err) {
-		console.error(err);
+
+	const handleDeleteFromFavorites = (key) => {
+		storage.del(key, errorCallback, errorCallback);
+		var updatedArray = keys.filter((x) => x !== key);
+		setKeys(updatedArray);
 	};
 
-	const clear = () => {
-		// var storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
-		storage.clear(successclearCallback, errorclearCallback);
-	};
-	const save = () => {
-		// var storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
-		storage.put('yala', 'the king');
-	};
 	return (
 		<div>
-			<Button variant='contained' onClick={() => clear()}>
-				clear
-			</Button>
-			<Button variant='contained' onClick={() => save()}>
-				save
-			</Button>
-
-			<Box display='flex' height='70vh' alignItems='center'>
-				{keys.length === 0 ? (
+			{keys.length === 0 ? (
+				<Box display='flex' height='70vh' alignItems='center'>
 					<Typography variant='h4' gutterBottom className={classes.backgroundTitle} align='center'>
 						There are no favorites recipes
 					</Typography>
-				) : (
-					<div>
-						{keys.map((key) => (
-							<h6>
-								{key} {storage.get(key, 'null', successclearCallback, errorclearCallback)}
-							</h6>
-						))}
-					</div>
-				)}
-			</Box>
+				</Box>
+			) : (
+				<div style={{ height: '100%', marginBottom: 50 }}>
+					{keys.map((key) => (
+						<FavoriteRecipe title={key} delete={handleDeleteFromFavorites} />
+					))}
+				</div>
+			)}
 		</div>
 	);
 };

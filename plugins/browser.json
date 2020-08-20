@@ -18,6 +18,9 @@
     },
     "cordova-plugin-awesome-shared-preferences": {
       "PACKAGE_NAME": "com.afcordova.cooking"
+    },
+    "cordova-plugin-appsflyer-sdk": {
+      "PACKAGE_NAME": "com.afcordova.cooking"
     }
   },
   "dependent_plugins": {}

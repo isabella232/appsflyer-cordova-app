@@ -35,7 +35,7 @@ const SearchPage = () => {
 		setsearch(e.target.value);
 	};
 
-	const handleDelete = (item) => {
+	const handleDeleteIngredients = (item) => {
 		var updatedArray = ingredients.filter((x) => x !== item);
 		setIngredients(updatedArray);
 	};
@@ -62,7 +62,7 @@ const SearchPage = () => {
 					variant='outlined'
 				/>
 			</Box>
-			<IngredientList ingredients={ingredients} deleteFunction={handleDelete} />
+			<IngredientList ingredients={ingredients} deleteFunction={handleDeleteIngredients} />
 			<RecipesList ingredients={ingredients} />
 		</div>
 	);
