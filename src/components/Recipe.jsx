@@ -9,6 +9,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
@@ -83,18 +84,24 @@ const Recipe = (props) => {
 		<div>
 			<List dense={true}>
 				<ListItem>
-					<ListItemAvatar>
-						<Avatar className={classes.large} alt={title} src={thumbnail} />
-					</ListItemAvatar>
-					<ListItemText primary={title} secondary={ingredients} onClick={() => handleOpenRecipeUrl(href)} />
-					<ListItemSecondaryAction>
-						<IconButton edge='end' aria-label='delete'>
-							<AddShoppingCartIcon onClick={() => handleAddToTheShoppingCart(ingredients)} />
-						</IconButton>
-						<IconButton edge='end' aria-label='delete'>
-							{favorite ? <FavoriteIcon fontSize='large' style={{ color: '#FF9134' }} onClick={() => handleDelete()} /> : <FavoriteBorderIcon className={classes.icon} fontSize='large' style={{ color: '#C2C2C2' }} onClick={() => handleSave()} />}
-						</IconButton>
-					</ListItemSecondaryAction>
+					<Grid item xs={3}>
+						<ListItemAvatar>
+							<Avatar className={classes.large} alt={title} src={thumbnail} />
+						</ListItemAvatar>
+					</Grid>
+					<Grid item xs={7}>
+						<ListItemText primary={title} secondary={ingredients} onClick={() => handleOpenRecipeUrl(href)} />
+					</Grid>
+					<Grid item xs={3}>
+						<ListItemSecondaryAction>
+							<IconButton edge='end' aria-label='delete'>
+								<AddShoppingCartIcon onClick={() => handleAddToTheShoppingCart(ingredients)} />
+							</IconButton>
+							<IconButton edge='end' aria-label='delete'>
+								{favorite ? <FavoriteIcon fontSize='large' style={{ color: '#FF9134' }} onClick={() => handleDelete()} /> : <FavoriteBorderIcon className={classes.icon} fontSize='large' style={{ color: '#C2C2C2' }} onClick={() => handleSave()} />}
+							</IconButton>
+						</ListItemSecondaryAction>
+					</Grid>
 				</ListItem>
 			</List>
 		</div>
