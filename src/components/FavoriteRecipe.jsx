@@ -18,13 +18,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FavoriteRecipe = (props) => {
+	const { title, removeFromFavorites } = props;
 	const classes = useStyles();
 	const [recipeData, setrecipeData] = useState('');
 	const storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
 
 	useEffect(() => {
-		storage.get(props.title, 'null', handleFetchSuccess, handleFetchFailure);
-	}, [props.title]);
+		storage.get(title, 'null', handleFetchSuccess, handleFetchFailure);
+	}, [title]);
 
 	const handleOpenRecipeUrl = (url) => {
 		window.open(url, '_blank');
@@ -40,12 +41,12 @@ const FavoriteRecipe = (props) => {
 			<List dense={true}>
 				<ListItem>
 					<ListItemAvatar>
-						<Avatar className={classes.large} alt={props.title} src={recipeData[0]} />
+						<Avatar className={classes.large} alt={title} src={recipeData[0]} />
 					</ListItemAvatar>
-					<ListItemText primary={props.title} secondary={recipeData[1]} onClick={() => handleOpenRecipeUrl(recipeData[2])} />
+					<ListItemText primary={title} secondary={recipeData[1]} onClick={() => handleOpenRecipeUrl(recipeData[2])} />
 					<ListItemSecondaryAction>
 						<IconButton edge='end' aria-label='delete'>
-							<FavoriteIcon fontSize='large' style={{ color: '#FF9134' }} onClick={() => props.delete(props.title)} />
+							<FavoriteIcon fontSize='large' style={{ color: '#FF9134' }} onClick={() => removeFromFavorites(title)} />
 						</IconButton>
 					</ListItemSecondaryAction>
 				</ListItem>

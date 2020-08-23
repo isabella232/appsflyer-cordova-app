@@ -11,6 +11,7 @@
     "cordova-plugin-appsflyer-sdk": "^5.4.30",
     "cordova-plugin-awesome-shared-preferences": "^0.1.0",
     "cordova-plugin-inappbrowser": "^4.0.0",
+    "cordova-plugin-splashscreen": "6.0.0",
     "cordova-plugin-statusbar": "2.4.3",
     "cordova_script": "0.0.2",
     "cra-template": "1.0.3",
@@ -60,7 +61,8 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-awesome-shared-preferences": {},
-      "cordova-plugin-appsflyer-sdk": {}
+      "cordova-plugin-appsflyer-sdk": {},
+      "cordova-plugin-splashscreen": {}
     },
     "platforms": [
       "browser",

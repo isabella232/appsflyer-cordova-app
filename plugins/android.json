@@ -16,6 +16,9 @@
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.appsflyer.app.letscook"
     },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.appsflyer.app.letscook"
+    },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.appsflyer.app.letscook"
     },

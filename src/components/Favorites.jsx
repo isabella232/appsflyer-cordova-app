@@ -70,7 +70,7 @@ const Favorites = () => {
 			) : (
 				<div style={{ height: '100%', marginBottom: 50 }}>
 					{keys.map((key) => (
-						<FavoriteRecipe title={key} delete={handleDeleteFromFavorites} />
+						<FavoriteRecipe title={key} removeFromFavorites={handleDeleteFromFavorites} />
 					))}
 				</div>
 			)}

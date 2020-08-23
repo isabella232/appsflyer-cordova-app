@@ -3,6 +3,7 @@ import axios from 'axios';
 import Recipe from './Recipe';
 import Box from '@material-ui/core/Box';
 import SnackBar from './SnackBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -75,11 +76,15 @@ const RecipesList = (props) => {
 						Type ingredients to search for a recipe...
 					</Typography>
 				</Box>
-			) : (
+			) : data.length !== 0 ? (
 				<div style={{ height: '100%', marginBottom: 50 }}>
 					{data.map((recipe) => (
 						<Recipe title={recipe.title} thumbnail={recipe.thumbnail} ingredients={recipe.ingredients} href={recipe.href} userFeedback={openSnackbar} />
 					))}
+				</div>
+			) : (
+				<div style={{ position: 'relative' }}>
+					<CircularProgress style={{ marginLeft: '45%', marginTop: '40%' }} />
 				</div>
 			)}
 			<SnackBar open={open} message={message} close={handleCloseSnackBar} />

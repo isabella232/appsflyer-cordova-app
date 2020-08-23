@@ -14,7 +14,6 @@ const AboutDialog = (props) => {
 	return (
 		<Dialog aria-labelledby='simple-dialog-title' open={open} onClose={handleClose}>
 			<DialogTitle id='simple-dialog-title'>{<img style={{ height: 50, margin: 10 }} src={'https://1z1euk35x7oy36s8we4dr6lo-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/AppsFlyer-logo.png'} alt='{tile.title}' />}</DialogTitle>
-
 			<DialogContent>
 				<DialogContentText>This app was built with React & Cordova by the Appsflyer's SDK team in order to demonstrate a proper implementation of the Appsflyer's Cordova Plugin.</DialogContentText>
 				<DialogContentText>Enjoy!</DialogContentText>
