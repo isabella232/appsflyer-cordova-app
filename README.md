@@ -1,9 +1,15 @@
 # Let's cook!
 Need ideas for some new recipes? let's cook is your place.
 Enter the ingredients that you want to make food with and the app will find you awsome recipes. Did you find a recipe that you like? you can save it and also create a shopping list for it.  
+<<<<<<< HEAD
 <img src="https://github.com/AppsFlyerSDK/appsflyer-cordova-app/blob/master/res/screen3.jpeg"  width="250">
 <img src="https://github.com/AppsFlyerSDK/appsflyer-cordova-app/blob/master/res/screen1.jpeg"  width="250">
 <img src="https://github.com/AppsFlyerSDK/appsflyer-cordova-app/blob/master/res/screen2.jpeg"  width="250">
+=======
+<img src="https://github.com/AppsFlyerSDK/appsflyer-cordova-app/blob/master/images/screen3.jpeg"  width="250">
+<img src="https://github.com/AppsFlyerSDK/appsflyer-cordova-app/blob/master/images/screen1.jpeg"  width="250">
+<img src="https://github.com/AppsFlyerSDK/appsflyer-cordova-app/blob/master/images/screen2.jpeg"  width="250">
+>>>>>>> 322c21322adf175b174218db0024c0c4b245d59b
 
 ## 📲Installation
 1. This app was built with Cordova and React. first install a tool called `Reco (react.cordova)` [Here](https://www.npmjs.com/package/react.cordova)
