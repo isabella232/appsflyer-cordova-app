@@ -8,8 +8,9 @@ Enter the ingredients that you want to make food with and the app will find you 
 ## 📲Installation
 1. This app was built with Cordova and React. first install a tool called `Reco (react.cordova)` [Here](https://www.npmjs.com/package/react.cordova)
 2. Clone the project repository
-3. In the project's folder run the command:`npm run build` to build for Android AND ios, or `npm run build <platform>` to build for specific platform.
-4.  run the project on your device or emulator from Android Studio or Xcode.
+3. Add platform with `cordova platform add <android/ios>`
+4. In the project's folder run the command:`npm run build` to build for Android AND ios, or `npm run build <platform>` to build for specific platform.
+5.  run the project on your device or emulator from Android Studio or Xcode.
 
 ## 🚀 About the app
 This app was built with React & Cordova by the Appsflyer's SDK team in order to demonstrate a proper implementation of the Appsflyer's Cordova Plugin.

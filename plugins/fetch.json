@@ -34,7 +34,7 @@
   "cordova-plugin-appsflyer-sdk": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-appsflyer-sdk"
+      "id": "cordova-plugin-appsflyer-sdk@^5.4.30"
     },
     "is_top_level": true,
     "variables": {}

@@ -5,7 +5,6 @@
 /.pnp
 .pnp.js
 /platforms
-/plugins
 package-lock.json
 
 # testing
