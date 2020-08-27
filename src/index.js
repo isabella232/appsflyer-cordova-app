@@ -21,6 +21,7 @@ function onDeviceReady() {
 		devKey: 'Us4Gm2SnJghcuoev846Qed', //AppsFlyer devkey
 		isDebug: true,
 		onInstallConversionDataListener: true,
+		appId: '123336789',
 	};
 	window.plugins.appsFlyer.initSdk(options, handleSuccessInit, handleFailureInit);
 

@@ -23,14 +23,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-awesome-shared-preferences": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-awesome-shared-preferences@^0.1.0"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-appsflyer-sdk": {
     "source": {
       "type": "registry",

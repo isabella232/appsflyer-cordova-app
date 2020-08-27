@@ -21,20 +21,19 @@ const FavoriteRecipe = (props) => {
 	const { title, removeFromFavorites } = props;
 	const classes = useStyles();
 	const [recipeData, setrecipeData] = useState('');
-	const storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
+	const localStorage = window.localStorage;
 
 	useEffect(() => {
-		storage.get(title, 'null', handleFetchSuccess, handleFetchFailure);
+		var data = localStorage.getItem(title);
+		if (data !== null) {
+			data = JSON.parse(data);
+			setrecipeData(data);
+		}
 	}, [title]);
 
 	const handleOpenRecipeUrl = (url) => {
 		window.open(url, '_blank');
 	};
-
-	const handleFetchSuccess = (result) => {
-		setrecipeData(JSON.parse(result));
-	};
-	const handleFetchFailure = () => {};
 
 	return (
 		<div>

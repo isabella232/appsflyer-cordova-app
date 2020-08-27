@@ -21,27 +21,26 @@ const useStyles = makeStyles((theme) => ({
 const ShoppingList = () => {
 	const classes = useStyles();
 	const [data, setData] = useState([]);
-	const storage = window.plugins.SharedPreferences.getInstance('shoppingList');
+	const localStorage = window.localStorage;
 
 	useEffect(() => {
 		fetchData();
 	}, []);
 
 	const fetchData = () => {
-		storage.keys(successCallback, errorCallback);
+		var shoppingList = localStorage.getItem('shoppingList');
+		if (shoppingList === null) {
+			setData('');
+		} else {
+			shoppingList = JSON.parse(shoppingList);
+			setData(shoppingList);
+		}
 	};
 
-	const successCallback = function (val) {
-		setData(val);
-	};
-	const errorCallback = function (err) {
-		console.error(err);
-	};
-
-	const handleDeleteFromFavorites = (key) => {
-		storage.del(key, errorCallback, errorCallback);
+	const handleDeleteFromShoppingList = (key) => {
 		var updatedArray = data.filter((x) => x !== key);
 		setData(updatedArray);
+		localStorage.setItem('shoppingList', JSON.stringify(updatedArray));
 	};
 
 	return (
@@ -55,7 +54,7 @@ const ShoppingList = () => {
 			) : (
 				<List className={classes.root}>
 					{data.map((key) => {
-						return <ShoppingListItem title={key} remove={handleDeleteFromFavorites} />;
+						return <ShoppingListItem title={key} remove={handleDeleteFromShoppingList} />;
 					})}
 				</List>
 			)}

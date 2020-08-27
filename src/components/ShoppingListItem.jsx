@@ -11,52 +11,35 @@ import { useState, useEffect } from 'react';
 const ShoppingListItem = (props) => {
 	const { title, remove } = props;
 	const [checked, setChecked] = useState(0);
-	const storage = window.plugins.SharedPreferences.getInstance('shoppingList');
 	const labelId = `checkbox-list-label-${title}`;
+	const localStorage = window.localStorage;
 
 	useEffect(() => {
-		storage.getBoolean(title, successCallback, errorCallback);
+		fetchData();
 	}, []);
 
-	const successCallback = function (val) {
-		if (val) {
+	const fetchData = () => {
+		var isChecked = localStorage.getItem(title);
+		if (isChecked === '1') {
 			setChecked(1);
 		} else {
 			setChecked(0);
 		}
 	};
-	const errorCallback = function (err) {
-		console.error(err);
-	};
 
-	const handleToggle = () => () => {
-		storage.del(
-			title,
-			() => console.log(),
-			() => console.log()
-		);
+	const handleToggle = () => {
 		if (checked === 0) {
 			setChecked(1);
-			storage.putBoolean(
-				title,
-				true,
-				() => console.log(),
-				() => console.log()
-			);
+			localStorage.setItem(title, '1');
 		} else {
 			setChecked(0);
-			storage.putBoolean(
-				title,
-				false,
-				() => console.log(),
-				() => console.log()
-			);
+			localStorage.setItem(title, '0');
 		}
 	};
 
 	return (
 		<div>
-			<ListItem key={title} role={undefined} dense button onClick={handleToggle()}>
+			<ListItem key={title} role={undefined} dense button onClick={handleToggle}>
 				<ListItemIcon>
 					<Checkbox edge='start' checked={checked === 1} tabIndex={-1} color='primary' disableRipple inputProps={{ 'aria-label': labelId }} />
 				</ListItemIcon>

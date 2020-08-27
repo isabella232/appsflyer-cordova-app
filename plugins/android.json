@@ -10,9 +10,6 @@
     "cordova-plugin-appsflyer-sdk": {
       "PACKAGE_NAME": "com.appsflyer.app.letscook"
     },
-    "cordova-plugin-awesome-shared-preferences": {
-      "PACKAGE_NAME": "com.appsflyer.app.letscook"
-    },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.appsflyer.app.letscook"
     },

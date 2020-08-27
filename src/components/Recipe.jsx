@@ -27,21 +27,21 @@ const Recipe = (props) => {
 	const { title, thumbnail, ingredients, href, userFeedback } = props;
 	const classes = useStyles();
 	const [favorite, setfavorite] = useState(false);
-	const storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
-	const ingredientsStorage = window.plugins.SharedPreferences.getInstance('shoppingList');
+	const localStorage = window.localStorage;
 
 	useEffect(() => {
-		storage.has(title, handleFetchSuccess, handleFetchFailure);
+		var recipes = localStorage.getItem(title);
+		if (recipes === null) {
+			setfavorite(false);
+		} else {
+			setfavorite(true);
+		}
 	}, []);
 
 	const handleOpenRecipeUrl = (url) => {
 		window.open(url, '_blank');
 	};
 
-	const handleFetchSuccess = (result) => {
-		setfavorite(result);
-	};
-	const handleFetchFailure = () => {};
 	const successTrackEvent = (success) => {
 		//do something after the event registered in appsflyer
 		console.log(success);
@@ -52,8 +52,9 @@ const Recipe = (props) => {
 	};
 
 	const handleSave = () => {
-		storage.put(title, JSON.stringify([thumbnail, ingredients, href]), () => console.log(`${title} saved`), console.log('propblem'));
+		localStorage.setItem(title, JSON.stringify([thumbnail, ingredients, href]));
 		setfavorite(true);
+		saveArrayToStorage('savedRecipes', title);
 		userFeedback(`${title} added to favorites!`);
 		var eventName = 'af_added_to_favorites'; //the event name as it will appear on the dashboard. for recommended names visit appsflyer's support site.
 		var eventValues = { af_content_id: title, af_currency: 'USD', af_revenue: '2' };
@@ -61,19 +62,32 @@ const Recipe = (props) => {
 	};
 
 	const handleDelete = () => {
-		storage.del(title, () => console.log(`${title} removed`), console.log('propblem'));
+		removeFromFavoritesArray();
+		localStorage.removeItem(title);
 		setfavorite(false);
 		userFeedback(`${title} removed to favorites!`);
 	};
+
+	const removeFromFavoritesArray = () => {
+		var favoritesRecipes = JSON.parse(localStorage.getItem('savedRecipes'));
+		var index = favoritesRecipes.indexOf(title);
+		favoritesRecipes.splice(index, 1);
+		localStorage.setItem('savedRecipes', JSON.stringify(favoritesRecipes));
+	};
+	const saveArrayToStorage = (arrayOnStorage, el) => {
+		var arr = JSON.parse(localStorage.getItem(arrayOnStorage));
+		if (arr === null) {
+			arr = [];
+		}
+		arr.push(el);
+		localStorage.setItem(arrayOnStorage, JSON.stringify(arr));
+	};
+
 	const handleAddToTheShoppingCart = (str) => {
 		userFeedback('Added to shopping cart!');
-		str.split(',').map((i) => {
-			ingredientsStorage.putBoolean(
-				i.trim(),
-				false,
-				() => console.log(),
-				() => console.log()
-			);
+		str.split(', ').map((el) => {
+			saveArrayToStorage('shoppingList', el);
+			localStorage.setItem(el, '0');
 		});
 		var eventName = 'af_added_to_cart'; //the event name as it will appear on the dashboard. for recommended names visit appsflyer's support site.
 		var eventValues = { af_content_id: ingredients };

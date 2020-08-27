@@ -36,27 +36,26 @@ const useStyles = makeStyles((theme) => ({
 const Favorites = () => {
 	const classes = useStyles();
 	const [keys, setKeys] = useState('');
-	const storage = window.plugins.SharedPreferences.getInstance('savedRecipes');
+	const localStorage = window.localStorage;
 
 	useEffect(() => {
 		fetchData();
 	}, []);
 
 	const fetchData = () => {
-		storage.keys(successCallback, errorCallback);
-	};
-
-	var successCallback = function (val) {
-		setKeys(val);
-	};
-	var errorCallback = function (err) {
-		console.error(err);
+		var recipes = localStorage.getItem('savedRecipes');
+		if (recipes === null) {
+			setKeys('');
+		} else {
+			recipes = JSON.parse(recipes);
+			setKeys(recipes);
+		}
 	};
 
 	const handleDeleteFromFavorites = (key) => {
-		storage.del(key, errorCallback, errorCallback);
 		var updatedArray = keys.filter((x) => x !== key);
 		setKeys(updatedArray);
+		localStorage.setItem('savedRecipes', JSON.stringify(updatedArray));
 	};
 
 	return (
