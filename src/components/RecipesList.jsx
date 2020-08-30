@@ -56,7 +56,7 @@ const RecipesList = (props) => {
 				setData(res.data.results);
 			})
 			.catch((res) => {
-				console.log('Problem');
+				console.log(res);
 			});
 	};
 

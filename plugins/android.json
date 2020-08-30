@@ -21,6 +21,12 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.appsflyer.app.letscook"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.appsflyer.app.letscook"
+    },
+    "cordova-plugin-wkwebviewxhrfix": {
+      "PACKAGE_NAME": "com.appsflyer.app.letscook"
     }
   },
   "dependent_plugins": {}

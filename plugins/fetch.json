@@ -38,5 +38,21 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-wkwebview-engine": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-wkwebview-engine"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-wkwebviewxhrfix": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/TheMattRay/cordova-plugin-wkwebviewxhrfix"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
