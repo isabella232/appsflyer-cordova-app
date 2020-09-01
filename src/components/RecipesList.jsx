@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Recipe from './Recipe';
 import Box from '@material-ui/core/Box';
 import SnackBar from './SnackBar';
@@ -12,17 +11,6 @@ const useStyles = makeStyles((theme) => ({
 		color: '#C5C5C8',
 		margin: 'auto',
 		textAlign: 'center',
-	},
-	root: {
-		flexGrow: 1,
-		display: 'flex',
-		flexWrap: 'wrap',
-		justifyContent: 'space-around',
-		overflow: 'hidden',
-		backgroundColor: theme.palette.background.paper,
-		marginBottom: 10,
-		marginTop: 10,
-		height: 200,
 	},
 	media: {
 		height: 130,
@@ -39,8 +27,7 @@ const RecipesList = (props) => {
 	const [data, setData] = useState([]);
 	const [open, setOpenSnackBar] = useState(false);
 	const [message, setMessage] = useState('');
-	const proxyUrl = 'https://cors-anywhere.herokuapp.com/',
-		targetUrl = 'http://www.recipepuppy.com/api/?i=';
+	const targetUrl = 'http://www.recipepuppy.com/api/?i=';
 
 	useEffect(() => {
 		if (ingredients.length !== 0) {
@@ -51,14 +38,22 @@ const RecipesList = (props) => {
 	}, [ingredients]);
 
 	const fetchData = () => {
-		axios
-			.get(proxyUrl + targetUrl + ingredients)
-			.then((res) => {
-				setData(res.data.results);
-			})
-			.catch((res) => {
-				console.log(res);
-			});
+		const options = {
+			method: 'get',
+			headers: { Authorization: 'OAuth2: token' },
+		};
+
+		window.cordova.plugin.http.sendRequest(
+			targetUrl + ingredients,
+			options,
+			function (response) {
+				var obj = JSON.parse(response.data);
+				setData(obj.results);
+			},
+			function (response) {
+				console.log(response.error);
+			}
+		);
 	};
 
 	const openSnackbar = (str) => {

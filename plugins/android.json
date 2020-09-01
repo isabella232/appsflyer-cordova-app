@@ -27,7 +27,14 @@
     },
     "cordova-plugin-wkwebviewxhrfix": {
       "PACKAGE_NAME": "com.appsflyer.app.letscook"
+    },
+    "cordova-plugin-advanced-http": {
+      "PACKAGE_NAME": "com.appsflyer.app.letscook"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.appsflyer.app.letscook"
+    }
+  }
 }

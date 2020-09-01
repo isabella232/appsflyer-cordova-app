@@ -20,6 +20,9 @@
     <preference name="StatusBarBackgroundColor" value="#FFAD42" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <platform name="android">
+    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
         <allow-intent href="market:*" />
         <icon src="icon.png" />
         <preference name="android-targetSdkVersion" value="29" />

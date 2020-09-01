@@ -9,7 +9,9 @@
     "cordova-android": "^9.0.0",
     "cordova-browser": "~6.0.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-advanced-http": "^3.0.1",
     "cordova-plugin-appsflyer-sdk": "^5.4.30",
+    "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-splashscreen": "6.0.0",
     "cordova-plugin-statusbar": "2.4.3",
@@ -65,7 +67,8 @@
       "cordova-plugin-appsflyer-sdk": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-wkwebview-engine": {},
-      "cordova-plugin-wkwebviewxhrfix": {}
+      "cordova-plugin-wkwebviewxhrfix": {},
+      "cordova-plugin-advanced-http": {}
     },
     "platforms": [
       "browser",
