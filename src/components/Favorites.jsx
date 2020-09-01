@@ -1,8 +1,5 @@
 import React from 'react';
-import Recipe from './Recipe';
 import FavoriteRecipe from './FavoriteRecipe';
-import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { useState, useEffect } from 'react';
@@ -11,7 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 	backgroundTitle: {
 		color: '#C5C5C8',
-		margin: 20,
+		margin: 'auto',
+		textAlign: 'center',
 	},
 	root: {
 		flexGrow: 1,

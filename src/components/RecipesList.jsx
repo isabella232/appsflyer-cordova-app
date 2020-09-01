@@ -10,7 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 	backgroundTitle: {
 		color: '#C5C5C8',
-		margin: 20,
+		margin: 'auto',
+		textAlign: 'center',
 	},
 	root: {
 		flexGrow: 1,
